@@ -68,7 +68,19 @@
   .fill{position:absolute;inset:0 auto 0 0;width:0;background:linear-gradient(100deg,var(--wine),var(--wine-d));transition:width .5s ease;overflow:hidden;z-index:2}
   .fill b{position:absolute;inset:0 auto 0 0;display:grid;place-content:center;color:#fff;font-weight:800;white-space:nowrap}
   .track span{position:absolute;inset:0;display:grid;place-content:center;font-weight:800;color:var(--ink)}
-  .thanks{text-align:center;padding:30px 10px}
+  .pick{display:block;width:100%;text-align:left;font:inherit;background:#fff;border:1.5px solid var(--line);border-radius:18px;padding:16px 18px;cursor:pointer;margin-bottom:10px;color:var(--ink)}
+  .pick b{display:block;font-size:17px}
+  .pick small{display:block;color:var(--muted);font-size:13px;margin-top:2px}
+  .pick.top{background:linear-gradient(100deg,var(--wine),var(--wine-d));border:0;color:#fff;padding:24px 22px;box-shadow:0 12px 28px rgba(104,35,46,.28)}
+  .pick.top b{font-size:22px}
+  .pick.top small{color:#F0D9B1;font-size:14px}
+  .pick .tag{display:inline-block;background:var(--cream);color:var(--wine-d);font-weight:800;font-size:12px;padding:4px 10px;border-radius:999px;margin-bottom:8px}
+  .pick.sel{outline:3px solid var(--cream);outline-offset:2px}
+  .pick-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .howto{display:none;background:#fff;border:1.5px solid var(--line);border-radius:18px;padding:16px 18px;margin-bottom:12px;text-align:left;color:var(--muted);font-size:14px}
+  .howto.on{display:block;animation:in .25s ease}
+  .howto ol{margin:6px 0 10px;padding-left:20px}
+  .thanks{text-align:left;padding:10px 0}
   .thanks h1{font-size:32px}
   @media (max-width:560px){.opts{grid-template-columns:1fr}h1{font-size:25px}.scale label{padding:10px 0;font-size:14px}}
 </style>
@@ -245,7 +257,7 @@
     <!-- 10 -->
     <section class="step" data-msg="Last step">
       <h1>One more thing that would <em>really</em> help</h1>
-      <p class="lead">Optional, but a short video makes your story 10x stronger for the people who come after you.</p>
+      <p class="lead">A short video or voice note makes your story 10x stronger for the people who come after you. After you send this form, we'll show you how to send it to Queenie.</p>
       <div class="bonus">
         <h3>🎥 Send a short video or voice note to Queenie</h3>
         <p>Just send it in the chat you already use with her (WhatsApp, Instagram DM, …). Photos or screenshots of your results (revenue, clients, the event) are very welcome too.</p>
@@ -280,8 +292,32 @@
   </form>
 
   <div class="thanks step" id="thanks">
-    <h1>Thank you! 🙏</h1>
-    <p class="lead">Your experience means a lot to Queenie, and it will help the next person take their step.</p>
+    <h1>Thank you! 🙏 One last step</h1>
+    <p class="lead">Send your review back to Queenie in the chat where she sent you this link (WhatsApp, Instagram DM, …). How do you want to do it?</p>
+
+    <button type="button" class="pick top" data-p="video">
+      <span class="tag">⭐ Helps the most</span>
+      <b>🎥 Record a short video</b>
+      <small>30–60 seconds, selfie style is perfect</small>
+    </button>
+    <div class="howto" id="h-video">
+      <p><b>What to say:</b></p>
+      <ol><li>Who you are and what you do</li><li>Where you were stuck before</li><li>What Queenie did with you</li><li>What changed (numbers if you have them)</li><li>Who you'd recommend her to</li></ol>
+      <p>Then send the video to Queenie in your chat with her.</p>
+    </div>
+
+    <div class="pick-row">
+      <button type="button" class="pick" data-p="voice"><b>🎙️ Voice note</b><small>Same 5 points, just talk</small></button>
+      <button type="button" class="pick" data-p="text"><b>✍️ Paste text</b><small>We wrote it out for you</small></button>
+    </div>
+    <div class="howto" id="h-voice">
+      <p>Open your chat with Queenie, hold the microphone and tell her: who you are, where you were stuck, what she did, what changed and who you'd recommend her to.</p>
+    </div>
+    <div class="howto" id="h-text">
+      <textarea id="copyTxt" readonly style="min-height:170px;background:#fff"></textarea>
+      <button type="button" class="next" id="copyBtn" style="width:100%;margin-top:10px">Copy my review</button>
+      <p style="margin-top:8px">Then paste it in your chat with Queenie.</p>
+    </div>
   </div>
 </div>
 
@@ -329,7 +365,7 @@ function valid(i){
   for(const g of s.querySelectorAll('[data-req]')){
     if(!g.querySelector('input:checked')) return 'Please pick at least one option';
     const o=g.querySelector('input[data-more]:checked');
-    if(o){ const m=g.nextElementSibling; const t=m&&m.querySelector('input,textarea'); if(t && !m.dataset.always && !t.value.trim()) return 'Please tell us what "Other" is'; }
+    if(o){ const m=g.nextElementSibling; const t=m&&m.querySelector('input,textarea'); if(t && !t.value.trim()){ t.focus(); return 'You picked "Other": please explain it in the box below'; } }
   }
   return '';
 }
@@ -354,6 +390,10 @@ $('next').onclick=async()=>{
   await send();
 };
 
+document.querySelectorAll('.pick').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.pick').forEach(x=>x.classList.toggle('sel',x===b));
+  document.querySelectorAll('.howto').forEach(h=>h.classList.toggle('on',h.id==='h-'+b.dataset.p));
+});
 async function send(){
   const btn=$('next'); btn.disabled=true; btn.textContent='Sending…';
   $('fill').style.width='92%';
@@ -368,6 +408,9 @@ async function send(){
     const r=await fetch('https://api.web3forms.com/submit',{method:'POST',body:out,headers:{Accept:'application/json'}});
     const j=await r.json(); if(!j.success) throw 0;
     $('fill').style.width='100%'; $('track').classList.add('done'); $('barTxt').textContent='Sent ✓'; $('barTxt2').textContent='Sent ✓'; $('msg').textContent='Done';
+    const txt=[d.get('Experience'),d.get('Results (details)')].filter(x=>x&&String(x).trim()).join('\n\n')+'\n\n— '+(d.get('Full name')||'')+(d.get('Role and company')?', '+d.get('Role and company'):'')+(d.get('City and country')?' ('+d.get('City and country')+')':'');
+    $('copyTxt').value=txt;
+    $('copyBtn').onclick=async()=>{ try{await navigator.clipboard.writeText(txt)}catch(_){ $('copyTxt').select(); document.execCommand('copy'); } $('copyBtn').textContent='Copied ✓ Now paste it in the chat with Queenie'; };
     $('f').style.display='none'; $('thanks').classList.add('on'); window.scrollTo(0,0);
   }catch(_){ btn.disabled=false; btn.textContent='Send my experience'; $('err').textContent='Something went wrong, please try again.'; }
 }
