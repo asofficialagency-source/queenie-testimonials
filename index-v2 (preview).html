@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Share your experience with Queenie Kessie</title>
+<meta name="description" content="Worked with Queenie Kessie? Share your experience in a few minutes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+<!--
+  AS Media · testimonial form Queenie (v2 PREVIEW, 25/10): eenvoudiger copy (doel FK grade ≤ 6). NIET pushen, de live versie is index.html.
+  CONFIG below:
+   - WEB3FORMS_KEY : answers are emailed (same key as the DiaspoPlug page)
+-->
+<style>
+  :root{--wine:#68232E;--wine-d:#4E1A22;--cream:#F0D9B1;--cream-l:#FBF4E8;--ink:#2B1F21;--muted:#7C6F6A;--line:#EADFD2;--ok:#2E7D4F}
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{margin:0;font-family:Montserrat,system-ui,sans-serif;font-weight:500;color:var(--ink);background:var(--cream-l);line-height:1.55}
+  .wrap{max-width:640px;margin:0 auto;padding:24px 20px 150px;min-height:100%}
+  .brand{font-weight:800;font-size:14px;letter-spacing:3px;color:var(--wine-d);text-transform:uppercase;margin-bottom:22px}
+  .step{display:none;animation:in .35s ease}
+  .step.on{display:block}
+  @keyframes in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .kick{display:inline-block;background:#fff;border:1.5px solid var(--line);color:var(--wine-d);font-weight:700;font-size:12px;padding:6px 12px;border-radius:999px;margin-bottom:14px}
+  h1{font-size:30px;line-height:1.15;margin:0 0 10px;font-weight:800;letter-spacing:-.6px}
+  h1 em{font-style:normal;color:var(--wine)}
+  .lead{color:var(--muted);margin:0 0 22px}
+  .card{background:#fff;border:1.5px solid var(--line);border-radius:22px;padding:22px}
+  label.t{display:block;font-weight:700;margin:0 0 7px}
+  label.t small{font-weight:500;color:var(--muted)}
+  .f{margin-bottom:16px}
+  input[type=text],input[type=email],input[type=tel],input[type=url],textarea{width:100%;font:inherit;padding:13px 15px;border:1.5px solid var(--line);border-radius:14px;background:#fff;color:var(--ink)}
+  input:focus,textarea:focus{outline:none;border-color:var(--wine)}
+  textarea{min-height:110px;resize:vertical}
+  textarea.big{min-height:230px}
+  .opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .opt{display:flex;gap:10px;align-items:center;border:1.5px solid var(--line);border-radius:14px;padding:12px 14px;cursor:pointer;font-weight:600;font-size:15px;background:#fff;transition:border-color .15s,background .15s}
+  .opt:has(input:checked){border-color:var(--wine);background:var(--cream-l)}
+  .opt input{accent-color:var(--wine);width:18px;height:18px;flex:none}
+  .more{display:none;margin-top:12px}
+  .more.on{display:block;animation:in .25s ease}
+  .more label{font-size:14px}
+  .info{display:inline-grid;place-content:center;width:20px;height:20px;border-radius:50%;background:var(--cream);color:var(--wine-d);font-size:12px;font-weight:800;cursor:help;margin-left:6px;position:relative;vertical-align:middle}
+  .info:hover::after,.info:focus::after{content:attr(data-tip);position:absolute;left:50%;bottom:130%;transform:translateX(-50%);width:240px;background:var(--ink);color:#fff;font-size:12px;font-weight:500;line-height:1.4;padding:10px 12px;border-radius:10px;z-index:5}
+  .scale{display:grid;grid-template-columns:repeat(10,1fr);gap:6px}
+  .scale label{text-align:center;border-radius:12px;padding:12px 0;cursor:pointer;font-weight:800;color:#fff;opacity:.45;transition:opacity .15s,transform .15s}
+  .scale input{display:none}
+  .scale label:has(input:checked){opacity:1;transform:scale(1.08);box-shadow:0 6px 16px rgba(0,0,0,.18)}
+  .scale-legend{display:flex;justify-content:space-between;color:var(--muted);font-size:12px;margin-top:6px}
+  .yn{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .bonus{border:2px dashed var(--wine);border-radius:18px;padding:18px;background:var(--cream-l);margin-bottom:16px}
+  .bonus h3{margin:0 0 6px;font-size:17px}
+  .bonus p{margin:0 0 12px;color:var(--muted);font-size:14px}
+  .wa{display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;font-weight:700;text-decoration:none;padding:12px 18px;border-radius:999px}
+  .drop{display:block;border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:14px;text-align:center;cursor:pointer;font-weight:600;color:var(--wine-d)}
+  .drop input{display:none}
+  .files{font-size:13px;color:var(--muted);margin-top:8px}
+  .nav{display:flex;gap:10px;margin-top:18px}
+  .back{border:1.5px solid var(--line);background:#fff;color:var(--ink);font:inherit;font-weight:700;padding:14px 18px;border-radius:999px;cursor:pointer}
+  .next{flex:1;border:0;background:var(--wine);color:#fff;font:inherit;font-weight:700;font-size:16px;padding:15px;border-radius:999px;cursor:pointer}
+  .err{color:#B3261E;font-size:13px;font-weight:600;margin-top:8px;min-height:18px}
+  /* bottom progress bar */
+  .bar{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1.5px solid var(--line);padding:12px 20px 16px}
+  .bar .in{max-width:640px;margin:0 auto}
+  .msg{display:flex;justify-content:space-between;font-size:13px;font-weight:700;color:var(--wine-d);margin-bottom:8px}
+  .track{position:relative;height:50px;border-radius:999px;background:var(--cream-l);border:1.5px solid var(--line);overflow:hidden}
+  .fill{position:absolute;inset:0 auto 0 0;width:0;background:linear-gradient(100deg,var(--wine),var(--wine-d));transition:width .5s ease;overflow:hidden;z-index:2}
+  .fill b{position:absolute;inset:0 auto 0 0;display:grid;place-content:center;color:#fff;font-weight:800;white-space:nowrap}
+  .track span{position:absolute;inset:0;display:grid;place-content:center;font-weight:800;color:var(--ink)}
+  .pick{display:block;width:100%;text-align:left;font:inherit;background:#fff;border:1.5px solid var(--line);border-radius:18px;padding:16px 18px;cursor:pointer;margin-bottom:10px;color:var(--ink)}
+  .pick b{display:block;font-size:17px}
+  .pick small{display:block;color:var(--muted);font-size:13px;margin-top:2px}
+  .pick.top{background:linear-gradient(100deg,var(--wine),var(--wine-d));border:0;color:#fff;padding:24px 22px;box-shadow:0 12px 28px rgba(104,35,46,.28)}
+  .pick.top b{font-size:22px}
+  .pick.top small{color:#F0D9B1;font-size:14px}
+  .pick .tag{display:inline-block;background:var(--cream);color:var(--wine-d);font-weight:800;font-size:12px;padding:4px 10px;border-radius:999px;margin-bottom:8px}
+  .pick.sel{outline:3px solid var(--cream);outline-offset:2px}
+  .pick-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .howto{display:none;background:#fff;border:1.5px solid var(--line);border-radius:18px;padding:16px 18px;margin-bottom:12px;text-align:left;color:var(--muted);font-size:14px}
+  .howto.on{display:block;animation:in .25s ease}
+  .howto ol{margin:6px 0 10px;padding-left:20px}
+  .thanks{text-align:left;padding:10px 0}
+  .thanks h1{font-size:32px}
+  @media (max-width:560px){.opts{grid-template-columns:1fr}h1{font-size:25px}.scale label{padding:10px 0;font-size:14px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand">Queenie Kessie</div>
+
+  <form id="f" novalidate>
+    <!-- 1 -->
+    <section class="step" data-msg="Let's start">
+      <span class="kick">Takes about 4 minutes</span>
+      <h1>How was it working with <em>Queenie</em>?</h1>
+      <p class="lead">Your story helps others take their next step. First, who are you?</p>
+      <div class="card">
+        <div class="f"><label class="t" for="name">Full name</label><input id="name" type="text" name="Full name" required autocomplete="name"></div>
+        <div class="f"><label class="t" for="email">Email</label><input id="email" type="email" name="email" required autocomplete="email"></div>
+        <div class="f"><label class="t" for="tel">Phone number <small>(optional, WhatsApp)</small></label><input id="tel" type="tel" name="Phone" autocomplete="tel" placeholder="+32 ..."></div>
+      </div>
+    </section>
+
+    <!-- 2 -->
+    <section class="step" data-msg="Nice to meet you">
+      <h1>What do you do? Where do you live?</h1>
+      <div class="card">
+        <div class="f"><label class="t" for="role">Your role and company</label><input id="role" type="text" name="Role and company" placeholder="e.g. Founder, ABC Ltd" required></div>
+        <div class="f"><label class="t" for="city">City and country</label><input id="city" type="text" name="City and country" placeholder="e.g. Accra, Ghana" required></div>
+        <label class="t">Which describes you best?</label>
+        <div class="opts" data-name="Profile" data-req="1">
+          <label class="opt"><input type="radio" name="Profile" value="Runs a business">I run a business</label>
+          <label class="opt"><input type="radio" name="Profile" value="Works for a company">I work for a company</label>
+          <label class="opt"><input type="radio" name="Profile" value="Investor">I invest</label>
+          <label class="opt"><input type="radio" name="Profile" value="Organisation">I work for a group or agency</label>
+          <label class="opt"><input type="radio" name="Profile" value="Event organiser">I organise events</label>
+          <label class="opt"><input type="radio" name="Profile" value="Other" data-more>Other</label>
+        </div>
+        <div class="more"><label class="t">Tell us what you do</label><input type="text" name="Profile (other)"></div>
+      </div>
+    </section>
+
+    <!-- 3 -->
+    <section class="step" data-msg="Good">
+      <h1>How did you work with Queenie?</h1>
+      <p class="lead">Pick everything that applies.</p>
+      <div class="card">
+        <div class="opts" data-name="Service" data-req="1">
+          <label class="opt"><input type="checkbox" name="Service" value="Business advice">Business advice</label>
+          <label class="opt"><input type="checkbox" name="Service" value="Project management">She ran a project</label>
+          <label class="opt"><input type="checkbox" name="Service" value="Speaker">She spoke at my event</label>
+          <label class="opt"><input type="checkbox" name="Service" value="Panel">She joined our panel</label>
+          <label class="opt"><input type="checkbox" name="Service" value="Diaspora Connect Global">Diaspora Connect Global</label>
+          <label class="opt"><input type="checkbox" name="Service" value="Other" data-more>Other</label>
+        </div>
+        <div class="more"><label class="t">What else? <span class="info" tabindex="0" data-tip="For example: a workshop, a 1-on-1 strategy session, an introduction to a partner in Ghana, help with a trade mission…">i</span></label><input type="text" name="Service (other)" placeholder="e.g. a workshop for our team"></div>
+      </div>
+    </section>
+
+    <!-- 4 -->
+    <section class="step" data-msg="Keep going">
+      <h1>What did you need when you reached out?</h1>
+      <p class="lead">Pick everything that applies.</p>
+      <div class="card">
+        <div class="opts" data-name="Looking for" data-req="1">
+          <label class="opt"><input type="checkbox" name="Looking for" value="Start or grow a business in Africa">Start or grow a business in Africa</label>
+          <label class="opt"><input type="checkbox" name="Looking for" value="Grow my business in Europe">Grow my business in Europe</label>
+          <label class="opt"><input type="checkbox" name="Looking for" value="Trusted contacts / network">Trusted contacts / network</label>
+          <label class="opt"><input type="checkbox" name="Looking for" value="Investors or partners">Investors or partners</label>
+          <label class="opt"><input type="checkbox" name="Looking for" value="A clear plan and structure">A clear plan and structure</label>
+          <label class="opt"><input type="checkbox" name="Looking for" value="Someone to manage a project">Someone to manage a project</label>
+          <label class="opt"><input type="checkbox" name="Looking for" value="A speaker for my event">A speaker for my event</label>
+          <label class="opt"><input type="checkbox" name="Looking for" value="Other" data-more>Other</label>
+        </div>
+        <div class="more on"><label class="t" for="lfd">Tell us a bit more</label><textarea id="lfd" required name="Looking for (details)" placeholder="What exactly did you need at that moment?"></textarea></div>
+      </div>
+    </section>
+
+    <!-- 5 -->
+    <section class="step" data-msg="You're doing great">
+      <h1>What was holding you back before?</h1>
+      <p class="lead">Pick everything that applies.</p>
+      <div class="card">
+        <div class="opts" data-name="Challenge" data-req="1">
+          <label class="opt"><input type="checkbox" name="Challenge" value="No clear plan">No clear plan</label>
+          <label class="opt"><input type="checkbox" name="Challenge" value="Didn't know who to trust">Didn't know who to trust</label>
+          <label class="opt"><input type="checkbox" name="Challenge" value="No network on the ground">No network on the ground</label>
+          <label class="opt"><input type="checkbox" name="Challenge" value="Not enough time / structure">Not enough time / structure</label>
+          <label class="opt"><input type="checkbox" name="Challenge" value="Funding">Funding</label>
+          <label class="opt"><input type="checkbox" name="Challenge" value="Didn't know the local market">Didn't know the local market</label>
+          <label class="opt"><input type="checkbox" name="Challenge" value="Paperwork / regulations">Paperwork / regulations</label>
+          <label class="opt"><input type="checkbox" name="Challenge" value="Other" data-more>Other</label>
+        </div>
+        <div class="more on"><label class="t" for="sb">Describe your situation before <small>(the more detail, the better)</small></label><textarea id="sb" required class="big" name="Situation before" placeholder="Where were you stuck? What had you already tried? How did it feel?"></textarea></div>
+      </div>
+    </section>
+
+    <!-- 6 -->
+    <section class="step" data-msg="Halfway there">
+      <h1>How did you find Queenie? Why did you pick her?</h1>
+      <div class="card">
+        <label class="t">How did you first hear about her?</label>
+        <div class="opts" data-name="Found via" data-req="1">
+          <label class="opt"><input type="radio" name="Found via" value="Instagram">Instagram</label>
+          <label class="opt"><input type="radio" name="Found via" value="LinkedIn">LinkedIn</label>
+          <label class="opt"><input type="radio" name="Found via" value="Event / panel">At an event / panel</label>
+          <label class="opt"><input type="radio" name="Found via" value="Referral">Someone recommended her</label>
+          <label class="opt"><input type="radio" name="Found via" value="Diaspora Connect Global">Diaspora Connect Global</label>
+          <label class="opt"><input type="radio" name="Found via" value="Other" data-more>Other</label>
+        </div>
+        <div class="more"><label class="t">Where exactly?</label><input type="text" name="Found via (other)"></div>
+        <label class="t" style="margin-top:18px">Why did you choose to work with her?</label>
+        <div class="opts" data-name="Why Queenie" data-req="1">
+          <label class="opt"><input type="checkbox" name="Why Queenie" value="Her experience">Her experience</label>
+          <label class="opt"><input type="checkbox" name="Why Queenie" value="Her network">Her network</label>
+          <label class="opt"><input type="checkbox" name="Why Queenie" value="Trust / reputation">Trust / reputation</label>
+          <label class="opt"><input type="checkbox" name="Why Queenie" value="She understands the diaspora">She understands the diaspora</label>
+          <label class="opt"><input type="checkbox" name="Why Queenie" value="Recommendation">A recommendation</label>
+          <label class="opt"><input type="checkbox" name="Why Queenie" value="Other" data-more>Other</label>
+        </div>
+        <div class="more"><label class="t">What was it?</label><input type="text" name="Why Queenie (other)"></div>
+      </div>
+    </section>
+
+    <!-- 7 -->
+    <section class="step" data-msg="This is the important part">
+      <h1>Tell us your experience in your own words</h1>
+      <p class="lead">What did Queenie do for you, what was it like working together, and what would you tell a friend about her?</p>
+      <div class="bonus" style="border-style:solid;border-width:1.5px;border-color:var(--line)">
+        <h3>What makes a strong review</h3>
+        <ul style="margin:0;padding-left:20px;color:var(--muted);font-size:14px">
+          <li><b>Be specific:</b> what exactly did she do? ("she introduced me to 2 suppliers in Accra" beats "she was great")</li>
+          <li><b>Before → after:</b> where were you, where are you now?</li>
+          <li><b>Real numbers</b> if you have them (revenue, clients, time saved)</li>
+          <li><b>Your own words</b> and honest. No need to make it sound perfect.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <textarea class="big" name="Experience" required placeholder="Write it like you would say it to a friend. No need to be perfect."></textarea>
+      </div>
+    </section>
+
+    <!-- 8 -->
+    <section class="step" data-msg="Almost there">
+      <h1>What changed for you?</h1>
+      <p class="lead">Pick everything that applies.</p>
+      <div class="card">
+        <div class="opts" data-name="Results" data-req="1">
+          <label class="opt"><input type="checkbox" name="Results" value="More revenue">More revenue</label>
+          <label class="opt"><input type="checkbox" name="Results" value="New clients">New clients</label>
+          <label class="opt"><input type="checkbox" name="Results" value="New partners / contacts">New partners / contacts</label>
+          <label class="opt"><input type="checkbox" name="Results" value="Project launched / delivered">Project launched / delivered</label>
+          <label class="opt"><input type="checkbox" name="Results" value="Clear plan">A clear plan</label>
+          <label class="opt"><input type="checkbox" name="Results" value="More confidence">More confidence</label>
+          <label class="opt"><input type="checkbox" name="Results" value="Saved time / stress">Saved time / stress</label>
+          <label class="opt"><input type="checkbox" name="Results" value="Other" data-more>Other</label>
+        </div>
+        <div class="more on"><label class="t">Numbers or concrete examples <small>(optional, but they help a lot)</small> <span class="info" tabindex="0" data-tip="For example: revenue went from €2K to €6K a month, 3 new partners in Ghana, project delivered 2 weeks early.">i</span></label><textarea name="Results (details)" placeholder="e.g. revenue from €2K to €6K a month, 3 new partners in Ghana"></textarea></div>
+      </div>
+    </section>
+
+    <!-- 9 -->
+    <section class="step" data-msg="Almost there">
+      <h1>How would you rate working with Queenie?</h1>
+      <div class="card">
+        <div class="scale" data-name="Rating" data-req="1" id="scale"></div>
+        <div class="scale-legend"><span>1 · not good</span><span>10 · excellent</span></div>
+        <label class="t" style="margin-top:20px">May we share your experience publicly?</label>
+        <div class="yn" data-name="May share" data-req="1">
+          <label class="opt"><input type="radio" name="May share" value="Yes">Yes</label>
+          <label class="opt"><input type="radio" name="May share" value="No">No</label>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 -->
+    <section class="step" data-msg="Last step">
+      <h1>One more thing that would <em>really</em> help</h1>
+      <p class="lead">A short video or voice note makes your story much stronger for the next person. After you send this form, we show you how to send it to Queenie.</p>
+      <div class="bonus">
+        <h3>🎥 Send a short video or voice note to Queenie</h3>
+        <p>Just send it in the chat you already use with her (WhatsApp, Instagram DM, …). Photos or screenshots of your results (revenue, clients, the event) are very welcome too.</p>
+        <p style="margin:0"><b>A great 30–60 second video:</b></p>
+        <ol style="margin:6px 0 0;padding-left:20px;color:var(--muted);font-size:14px">
+          <li>Who you are and what you do</li>
+          <li>Where you were stuck before</li>
+          <li>What Queenie did with you</li>
+          <li>What changed (numbers if you have them)</li>
+          <li>Who you would recommend her to</li>
+        </ol>
+      </div>
+      <div class="card">
+        <label class="t">What would you like from Queenie next? <small>(optional)</small></label>
+        <div class="opts" data-name="Next">
+          <label class="opt"><input type="checkbox" name="Next" value="Work together again">Work together again</label>
+          <label class="opt"><input type="checkbox" name="Next" value="1-on-1 strategy session">1-on-1 strategy session</label>
+          <label class="opt"><input type="checkbox" name="Next" value="Introductions in Africa">Introductions in Africa</label>
+          <label class="opt"><input type="checkbox" name="Next" value="Speak at my event">Speak at my event</label>
+          <label class="opt"><input type="checkbox" name="Next" value="Join the DiaspoPlug app">Join the DiaspoPlug app</label>
+          <label class="opt"><input type="checkbox" name="Next" value="Other" data-more>Other</label>
+        </div>
+        <div class="more"><label class="t">What exactly?</label><input type="text" name="Next (other)"></div>
+      </div>
+    </section>
+
+    <div class="err" id="err"></div>
+    <div class="nav" id="nav">
+      <button type="button" class="back" id="back">Back</button>
+      <button type="button" class="next" id="next">Next</button>
+    </div>
+  </form>
+
+  <div class="thanks step" id="thanks">
+    <h1>Thank you! 🙏 One last step</h1>
+    <p class="lead">Send your review back to Queenie in the chat where she sent you this link (WhatsApp, Instagram DM, …). How do you want to do it?</p>
+
+    <button type="button" class="pick top" data-p="video">
+      <span class="tag">⭐ Helps the most</span>
+      <b>🎥 Record a short video</b>
+      <small>30–60 seconds, selfie style is perfect</small>
+    </button>
+    <div class="howto" id="h-video">
+      <p><b>What to say:</b></p>
+      <ol><li>Who you are and what you do</li><li>Where you were stuck before</li><li>What Queenie did with you</li><li>What changed (numbers if you have them)</li><li>Who you'd recommend her to</li></ol>
+      <p>Then send the video to Queenie in your chat with her.</p>
+    </div>
+
+    <div class="pick-row">
+      <button type="button" class="pick" data-p="voice"><b>🎙️ Voice note</b><small>Same 5 points, just talk</small></button>
+      <button type="button" class="pick" data-p="text"><b>✍️ Paste text</b><small>Send your answers straight in the chat</small></button>
+    </div>
+    <div class="howto" id="h-voice">
+      <p>Send Queenie a voice note in your chat with her. Tell her: who you are, where you were stuck, what she did, what changed and who you'd recommend her to.</p>
+    </div>
+    <div class="howto" id="h-text">
+      <textarea id="copyTxt" readonly style="min-height:170px;background:#fff"></textarea>
+      <button type="button" class="next" id="copyBtn" style="width:100%;margin-top:10px">Copy my review</button>
+      <p style="margin-top:8px">Then paste it in your chat with Queenie.</p>
+    </div>
+  </div>
+</div>
+
+<div class="bar"><div class="in">
+  <div class="msg"><span id="msg">Let's start</span><span id="cnt">1 / 10</span></div>
+  <div class="track" id="track"><span id="barTxt">Send my experience</span><div class="fill" id="fill"><b id="barTxt2">Send my experience</b></div></div>
+</div></div>
+
+<script>
+const WEB3FORMS_KEY = '7bff82df-9018-4cff-828f-3795eb3922d1';
+
+const steps=[...document.querySelectorAll('#f .step')];
+let cur=0;
+const $=id=>document.getElementById(id);
+
+// 1-10 scale, red -> green
+const sc=$('scale');
+for(let i=1;i<=10;i++){
+  const h=Math.round((i-1)*120/9);
+  const l=document.createElement('label');
+  l.style.background=`hsl(${h},62%,42%)`;
+  l.innerHTML=`<input type="radio" name="Rating" value="${i}">${i}`;
+  sc.appendChild(l);
+}
+
+// "Other" reveals the extra field
+document.querySelectorAll('.opts').forEach(g=>{
+  g.addEventListener('change',()=>{
+    const more=g.nextElementSibling;
+    if(!more||!more.classList.contains('more'))return;
+    const other=g.querySelector('input[data-more]');
+    if(other && !more.dataset.always){ more.classList.toggle('on', other.checked); if(other.checked) more.querySelector('input,textarea').focus(); }
+  });
+});
+document.querySelectorAll('.more.on').forEach(m=>m.dataset.always=1);
+
+// WhatsApp / upload boxes
+
+function valid(i){
+  const s=steps[i];
+  for(const el of s.querySelectorAll('input[required],textarea[required]')){
+    if(!el.value.trim()) return 'Please fill in: '+(s.querySelector(`label[for="${el.id}"]`)?.textContent||'this field');
+    if(el.type==='email' && !/^\S+@\S+\.\S+$/.test(el.value)) return 'Please enter a valid email';
+  }
+  for(const g of s.querySelectorAll('[data-req]')){
+    if(!g.querySelector('input:checked')) return 'Please pick at least one option';
+    const o=g.querySelector('input[data-more]:checked');
+    if(o){ const m=g.nextElementSibling; const t=m&&m.querySelector('input,textarea'); if(t && !t.value.trim()){ t.focus(); return 'You picked "Other": please explain it in the box below'; } }
+  }
+  return '';
+}
+function show(i){
+  steps.forEach((s,k)=>s.classList.toggle('on',k===i));
+  cur=i;
+  $('back').style.visibility=i?'visible':'hidden';
+  $('next').textContent=i===steps.length-1?'Send my experience':'Next';
+  $('msg').textContent=steps[i].dataset.msg;
+  $('cnt').textContent=(i+1)+' / '+steps.length;
+  const p=Math.round(i/steps.length*100);
+  $('fill').style.width=p+'%';
+  $('barTxt').textContent=i===steps.length-1?"You're almost there":p+'% · Send my experience';
+  $('barTxt2').textContent=$('barTxt').textContent; $('barTxt2').style.width=$('track').clientWidth+'px';
+  $('err').textContent='';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+$('back').onclick=()=>show(Math.max(0,cur-1));
+$('next').onclick=async()=>{
+  const e=valid(cur); if(e){$('err').textContent=e;return;}
+  if(cur<steps.length-1) return show(cur+1);
+  await send();
+};
+
+document.querySelectorAll('.pick').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.pick').forEach(x=>x.classList.toggle('sel',x===b));
+  document.querySelectorAll('.howto').forEach(h=>h.classList.toggle('on',h.id==='h-'+b.dataset.p));
+});
+async function send(){
+  const btn=$('next'); btn.disabled=true; btn.textContent='Sending…';
+  $('fill').style.width='92%';
+  const d=new FormData($('f'));
+  const out=new FormData();
+  out.append('access_key',WEB3FORMS_KEY);
+  out.append('subject','New testimonial for Queenie: '+(d.get('Full name')||''));
+  out.append('from_name','Queenie Testimonials');
+  const seen=new Set();
+  for(const [k] of d){ if(seen.has(k))continue; seen.add(k); const v=d.getAll(k).filter(x=>String(x).trim()).join(', '); if(v) out.append(k,v); }
+  try{
+    const r=await fetch('https://api.web3forms.com/submit',{method:'POST',body:out,headers:{Accept:'application/json'}});
+    const j=await r.json(); if(!j.success) throw 0;
+    $('fill').style.width='100%'; $('track').classList.add('done'); $('barTxt').textContent='Sent ✓'; $('barTxt2').textContent='Sent ✓'; $('msg').textContent='Done';
+    const txt=[d.get('Experience'),d.get('Results (details)')].filter(x=>x&&String(x).trim()).join('\n\n')+'\n\n— '+(d.get('Full name')||'')+(d.get('Role and company')?', '+d.get('Role and company'):'')+(d.get('City and country')?' ('+d.get('City and country')+')':'');
+    $('copyTxt').value=txt;
+    $('copyBtn').onclick=async()=>{ try{await navigator.clipboard.writeText(txt)}catch(_){ $('copyTxt').select(); document.execCommand('copy'); } $('copyBtn').textContent='Copied ✓ Now paste it in the chat with Queenie'; };
+    $('f').style.display='none'; $('thanks').classList.add('on'); window.scrollTo(0,0);
+  }catch(_){ btn.disabled=false; btn.textContent='Send my experience'; $('err').textContent='Something went wrong, please try again.'; }
+}
+show(Math.min(steps.length-1,+(new URLSearchParams(location.search).get("step")||0)));
+</script>
+</body>
+</html>
